@@ -14,7 +14,7 @@ RUN dotnet build "ConsoleApp1.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "ConsoleApp1.csproj" -c Release -o /app/publish
 
-FROM base AS final
+FROM build AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ConsoleApp1.dll"]
